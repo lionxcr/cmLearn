@@ -1,0 +1,14 @@
+extends login
+
+block content
+	div.login_div
+		div(id="login")
+			div.top_red
+			h2 CM LEARN SITE
+			h3 SIGN IN WITH YOUR CM CREDENTIALS
+			form.form-signin(action="/login", method="post", style="margin-top: -5px;")
+					label Email Address
+					input(type="text", name="username", required)
+					label Password
+					input(type="password", name="password", required)
+					input.signIn(type="submit", value="Sign in")
