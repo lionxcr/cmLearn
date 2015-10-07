@@ -1,0 +1,176 @@
+@media screen and (max-width:599px) {
+	/*
+		index page mobile style
+	*/
+
+	div[role=login] {
+		width: 90%;
+		margin-left: 10%;
+	}
+
+	div[role=login] #login {
+		width: 90%;
+	}
+
+	div[role=login] #login h2 {
+		width: 65%;
+		padding-left: 0;
+		margin-left: 15%;
+	}
+
+	div[role=login] #login h3 {
+		width: 65%;
+		padding-left: 0;
+		margin-left: 15%;
+	}
+
+	div[role=login] #login label {
+		width: 65%;
+		padding-left: 0;
+		margin-left: 15%;
+	}
+
+	div[role=login] #login input[type=text], div[role=login] #login input[type=password] {
+		width: 65%;
+		margin-left: 15%;
+	}
+	div[role=login] #login input.signIn {
+		margin-top: 0;
+		margin-left: 15%;
+		margin-bottom: 2%;
+	}
+
+	/*
+		Profile page mobile style
+	*/
+	div.request_results_left {
+		width: 95%;
+		margin-left: 2%;
+	}
+
+	div.request_results_left h3 {
+		width: 95%;
+	}
+
+	div.requests_results_right {
+		float: left;
+		width: 95%;
+		margin-left: 2%;
+	}
+
+	div.requests_results_right h3 {
+		width: 95%;
+	}
+
+	.lb_Status{
+    	margin-right: 5%;
+	}
+
+	/*
+		pdsa page mobile style
+	*/
+
+	span.small-nav{
+		display: none;
+	}
+
+	div[role=main] {
+		margin-left: 6%;
+	}
+
+	div[role=main] form #questions li[data-step="1"] fieldset {
+		width: 100%;
+	}
+
+	div[role=main] form fieldset {
+		width: 100%;
+	}
+
+	div[role=main] ol li span {
+		font-size: 23px;
+	}
+
+	div[role=main] ol li ul li {
+		display: inline-table;
+		margin-top: 2%;
+	}
+
+	div[role=main] form label, div[role=main] form input {
+		display: block;
+		z-index: 0;
+	}
+
+	menu, ol, ul {
+		padding: 5%;
+	}
+
+	div[role=main] form label {
+		text-align: left;
+	}
+
+	div[role=main] form #displaydatestart, div[role=main] form #displaydateend {
+		width: 252px;
+	}
+
+	div[role=main] form input.cost {
+		margin: 0;
+		display: inherit;
+		width: 217px;
+		left: 35px;
+	}
+
+	div[role=main] form .selectWrap.currency {
+		left: 0;
+	} 
+
+	div[role=main] ol li span.note {
+		left: 0;
+		top: 1px;
+	}
+
+	div[role=main] form div.submit-wrapper {
+		width: 252px;
+		text-align: right;
+	}
+
+	div[role=main] form textarea {
+		width: 252px;
+	}
+
+	div[role=main] form label#tnc {
+		width: 100%;
+		text-align: justify;
+	}
+
+	div[role=main] form #questions li[data-step="5"] fieldset {
+		height: 150px;
+		width: 80%;
+	}
+
+	div[role=main] form .wrap {
+		display: initial;
+
+	}
+
+	div[role=main] form .wrap .button {
+		margin-left: 10%;
+	}
+
+	div[role=main] ol li ul li ul li {
+		display: block;
+	}
+
+	.cbp-spmenu-vertical {
+		z-index: 9002;
+	}
+
+	div.home_page div p:before, div.home_page div p:after {
+		width: 0;
+	}
+}
+
+@media screen and (max-width:370px) {
+	span.xsmall-nav {
+		display: none;
+	}
+}

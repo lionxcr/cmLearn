@@ -1,4 +1,33 @@
 extends layout
 
 block content
-	h1 We Good
+	header
+		button.menu(id="showLeft")
+	nav.cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-left(id="cbp-spmenu-s1")
+		h3 Menu
+		a(href="/home") HOME
+		a(href="") MY PROFILE
+		a(href="/PDSARequest") PDSA REQUESTS
+		a(href="") LOGOUT
+	div.home_page
+		div
+			h2 CM LEARN
+			p 
+				i You have to learn the rules of the game. And then you have to play better than anyone else
+			p.quote 
+				b Albert Einstein
+			button(onclick="window.open('/PDSARequest','_self');") SUBMIT A PDSA REQUEST
+			button MY PROFILE
+			h4 New York City
+		video.video
+			source(src='http://cms.criticalmass.com/wp-content/uploads/2014/06/FINAL_UNMASS_CInemagraph_1.mp4', type='video/mp4')
+			source(src='http://cms.criticalmass.com/wp-content/uploads/2014/06/FINAL_UNMASS_CInemagraph_1.webm', type='video/webm')
+			source(src='http://cms.criticalmass.com/wp-content/uploads/2014/06/FINAL_UNMASS_CInemagraph_1.ogv', type='video/ogg')
+	script.
+		$(document).ready(function() {var video = $('.video'); video[0].play();});
+	script.
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),body = document.body;
+	script.
+		showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
+	script.
+		function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}}

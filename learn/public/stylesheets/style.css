@@ -2,7 +2,7 @@
   font-family: 'TradeGothicLTStd-BdCn20';
   font-style: normal;
   font-weight: normal;
-  src: local('TradeGothicLTStd-BdCn20'), url('/public/fonts/TradeGothicLTStd-BdCn20.otf') format('truetype');
+  src: local('TradeGothicLTStd-BdCn20'), url('/fonts/TradeGothicLTStd-BdCn20.otf') format('truetype');
 }
 
 
@@ -11,27 +11,27 @@
   font-family: 'TradeGothicLTStd-Cn18';
   font-style: normal;
   font-weight: normal;
-  src: local('TradeGothicLTStd-Cn18'), url('/public/fonts/TradeGothicLTStd-Cn18.otf') format('truetype');
+  src: local('TradeGothicLTStd-Cn18'), url('/fonts/TradeGothicLTStd-Cn18.otf') format('truetype');
 }
 
 @font-face {
   font-family: 'TradeGothicLTStd-Bold';
   font-style: normal;
   font-weight: normal;
-  src: local('TradeGothicLTStd-Bold'), url('/public/fonts/TradeGothicLTStd-Bold.otf') format('truetype');
+  src: local('TradeGothicLTStd-Bold'), url('/fonts/TradeGothicLTStd-Bold.otf') format('truetype');
 }
 
 @font-face {
   font-family: 'PlantinStd-Light';
   font-style: normal;
   font-weight: normal;
-  src: local('PlantinStd-Light'), url('/public/fonts/PlantinStd-Light.otf') format('truetype');
+  src: local('PlantinStd-Light'), url('/fonts/PlantinStd-Light.otf') format('truetype');
 }
 @font-face {
   font-family: 'TradeGothicLTStd-Bd2';
   font-style: normal;
   font-weight: normal;
-  src: local('TradeGothicLTStd-Bd2'), url('/public/fonts/TradeGothicLTStd-Bd2.otf') format('truetype');
+  src: local('TradeGothicLTStd-Bd2'), url('/fonts/TradeGothicLTStd-Bd2.otf') format('truetype');
 }
 
 html,
@@ -726,7 +726,7 @@ div[role=main] ol li {
   position: relative;
 }
 
-div[role=main] ol li span {
+.questionSpan {
   font-family: 'TradeGothicLTStd-Cn18', sans-serif;
   font-size: 26px;
 	letter-spacing: -0.01em;

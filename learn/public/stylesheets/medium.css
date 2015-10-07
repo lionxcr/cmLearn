@@ -1,0 +1,43 @@
+/* Log in */
+@media screen and (min-width:600px) and (max-width:983px) {
+	div[role=login]{
+		width: 410px;
+    	height: 440px;
+    	margin-left: 35%;
+    	position: relative;
+    	margin: 5% auto;
+   		line-height: 1.4em;
+	}
+	/* Profile */
+	div.request_results_left {
+		width: 95%;
+		margin-left: 2%;
+	}
+
+	div.request_results_left h3 {
+		width: 95%;
+	}
+
+	div.requests_results_right {
+		float: left;
+		width: 95%;
+		margin-left: 2%;
+	}
+
+	div.requests_results_right h3 {
+		width: 95%;
+	}
+
+	div[role=main] ol li{
+		width: 95%;
+	}
+
+	div[role=main] ol {
+		width: 95%;
+	}
+
+.lb_Status{
+    margin-right: 4%;
+}
+
+

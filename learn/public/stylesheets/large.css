@@ -1,0 +1,17 @@
+@media screen and (min-width:984px) and (max-width:1289px) {
+	div.request_results_left {
+		width: 40%;
+	}
+
+	div.request_results_left h3 {
+		width: 95%;
+	}
+
+	div.requests_results_right {
+		width: 40%;
+	}
+
+	div.requests_results_right h3 {
+		width: 95%;
+	}
+}

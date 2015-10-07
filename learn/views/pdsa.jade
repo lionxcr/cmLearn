@@ -1,0 +1,32 @@
+extends layout
+block variables
+	- bodyClass = "reviews"
+block content
+	header
+		h1
+			span.xsmall-nav PDSA Request Form
+		button.balance(id="open", onclick="showBalance(this.id);") MY BALANCE
+		button.menu(id="showLeft")
+	nav.cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-left(id="cbp-spmenu-s1")
+		h3 Menu
+		a(href="/home") HOME
+		a(href="") MY PROFILE
+		a(href="/PDSARequest") PDSA REQUESTS
+		a(href="") LOGOUT
+	div(role="main")
+		h2 #{greeting}
+		p.into You want to be the best at what you do. We all do &ndash; and that&rsquo;s why we work at Critical Mass. But it&rsquo;s a process, and we want to help. That&rsquo;s why there&rsquo;s the Professional Development program. Whether it&rsquo;s a course you want to take, reference materials to peruse, or maybe it&rsquo;s an industry event you&#x27;d like to attend - we&rsquo;ve got your back. All you have to do is let us know what you&rsquo;re thinking, why you&rsquo;re thinking it, and meet with your career developer to establish a plan to share your experience with your coworkers. It&rsquo;s really that simple.
+		div.content
+			span.questionSpan What would you like to use your PDSA on?
+	div(role="info_profile" id="my_balance")
+		h3 Your Remaining 2015 Balance:
+		div.balance $1000
+		span.notice *Balance is estimated and may not reflect partially submitted expenses.
+	script.
+		function showBalance(id){if (id == 'open') {$('#my_balance').css({"visibility": "visible"});var obj = document.getElementById(id);obj.id = 'closed';}else{$('#my_balance').css({"visibility": "hidden"});var obj = document.getElementById(id);obj.id = 'open';};}
+	script.
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),body = document.body;
+	script.
+		showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
+	script.
+		function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}}
