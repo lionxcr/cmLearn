@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 
 function getGreetings(name){
 	var greetingsArray = [
+		"Pura Vida",
 		"Ahoy",
 		"Aloha",
 		"Bonjour",
@@ -41,9 +42,11 @@ function getGreetings(name){
 		"Word up",
 		"Mellow greetings"
 	];
-	var randMVal = Math.floor(Math.random() * greetingsArray.length)
-	randMVal = randMVal -1;
+	var randMVal = Math.floor(Math.random() * greetingsArray.length-1);
 	var greet = greetingsArray[randMVal];
+	if (greet == '' || greet == null) {
+		greet = greetingsArray[0];
+	};
 	var greeting = greet+', '+name;
 	return greeting;
 }

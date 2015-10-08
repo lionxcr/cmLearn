@@ -15,18 +15,20 @@
 }
 
 @font-face {
+  font-family: 'TradeGothicLTStd-Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('TradeGothicLTStd-Light'), url('/fonts/TradeGothicLTStd.otf') format('truetype');
+}
+
+@font-face {
   font-family: 'TradeGothicLTStd-Bold';
   font-style: normal;
   font-weight: normal;
   src: local('TradeGothicLTStd-Bold'), url('/fonts/TradeGothicLTStd-Bold.otf') format('truetype');
 }
 
-@font-face {
-  font-family: 'PlantinStd-Light';
-  font-style: normal;
-  font-weight: normal;
-  src: local('PlantinStd-Light'), url('/fonts/PlantinStd-Light.otf') format('truetype');
-}
+
 @font-face {
   font-family: 'TradeGothicLTStd-Bd2';
   font-style: normal;
@@ -50,8 +52,8 @@ html {
 html,body{ 
   margin:0; 
   padding:0; 
-  height:95%; 
-  width:95%; 
+  height:100%; 
+  width:100%; 
   overflow:auto; /* or overflow:auto; if you want scrollbars */overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -334,7 +336,6 @@ textarea {
 
 body {
   background: linear-gradient(#e3e3e3, #f6f6f6, 10);;
-  padding: 90px 220px 50px 20px;
 	overflow: scroll;
 }
 
@@ -355,10 +356,10 @@ body.reviews{
   padding: 90px 20px 50px 20px;
 }
 body.login_body{
+  margin: 0;
   background-color: #e9e9e9;
   background-image: url(/img/calgary.jpg);
   background-size: cover;
-  padding: 90px 20px 50px 20px;
   font-family: 'TradeGothicLTStd-BdCn20', sans-serif;
 }
 
@@ -390,7 +391,7 @@ input[type=checkbox]:checked:after {
 }
 
 header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 	z-index: 10000;
@@ -428,7 +429,7 @@ header button.balance{
     width: 140px;
     height: 40px;
     top: 5px;
-    padding-top: 6px;
+    padding-top: 2px;
     background-color: transparent;
     color: #fff;
     text-transform: uppercase;
@@ -480,7 +481,7 @@ div.home_page div h2{
 
 div.home_page div p{
   font-size: 1.333333em;
-  font-family: 'PlantinStd-Light', sans-serif;
+  font-family: 'TradeGothicLTStd-Light', sans-serif;
 }
 
 div.home_page div p.quote{
@@ -679,17 +680,12 @@ div.login_div #login .error {
   text-align: center;
 }
 
-div[role=main] {
-    position: absolute;
-    left: 0;
-    top: 50px;
-    margin-top: 25px;
-    margin-left: 50px;
-    width: 100%;
-}
 div[role=main] p{
-  font-family: 'PlantinStd-Light', sans-serif;
-  width: 90%;
+  font-family: 'TradeGothicLTStd-Light', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  font-size: 14pt;
 }
   
 
@@ -700,9 +696,6 @@ div[role=main].fade {
 div[role=main] h2 {
   font-family: 'TradeGothicLTStd-BdCn20', sans-serif;
   font-size: 40px;
-  margin: 0;
-  width: 90%;
-  padding: 0 0 10px 0;
   border-bottom: solid 2px #fb2b2b;
 	letter-spacing: -0.01em;
 }
@@ -728,12 +721,13 @@ div[role=main] ol li {
 }
 
 .questionSpan {
-  font-family: 'TradeGothicLTStd-Cn18', sans-serif;
-  font-size: 26px;
-	letter-spacing: -0.01em;
-  margin: 0 auto;
-  display: block;
-  font-weight: bold;
+    font-family: 'TradeGothicLTStd-Cn18', sans-serif;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    margin-top: 40px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
 }
 
 div[role=main] ol li a.pdsa-choice {
@@ -1412,7 +1406,7 @@ div[role=info_profile] span.error {
 div[role=info_profile] span.notice {
   display: inline-block;
   margin-top: 10px;
-  font-family: 'PlantinStd-Light', sans-serif;
+  font-family: 'TradeGothicLTStd-Light', sans-serif;
   color: #fff;
   font-size: 11px;
   margin-bottom: 20px;
@@ -2229,7 +2223,7 @@ div.reviews_results_left label u{
 }
 
 div.reviews_results_left p{
-    font-family: 'PlantinStd-Light', sans-serif;
+    font-family: 'TradeGothicLTStd-Light', sans-serif;
     margin-top: 20px;
     height: 95px;
     width: 460px;
@@ -2373,7 +2367,7 @@ div.recommend_results_left label u{
 }
 
 div.recommend_results_left p{
-    font-family: 'PlantinStd-Light', sans-serif;
+    font-family: 'TradeGothicLTStd-Light', sans-serif;
     margin-top: 20px;
     height: 95px;
     width: 460px;
@@ -2586,7 +2580,7 @@ div.selected_class label u{
 }
 
 div.selected_class p{
-  font-family: 'PlantinStd-Light', sans-serif;
+  font-family: 'TradeGothicLTStd-Light', sans-serif;
   margin: 0px;
   width: 97%;
   font-weight: normal;
@@ -3004,25 +2998,7 @@ padding-top: 6px;
      background-color: #c0c0c0;
   color: #202020;
   }
-.close {
-    background: #252525;
-    color: #fb2b2b;
-    line-height: 25px;
-    position: absolute;
-    right: -12px;
-    text-align: center;
-    top: -10px;
-    width: 24px;
-    padding-top: 2px;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
-    box-shadow: 1px 1px 3px #000;
-}
+
 
 
 
@@ -3225,14 +3201,16 @@ padding-top: 6px;
 
 .pdsaTypeButton{
   margin-top: 30px;
-  margin-right: 10px;
-  margin-left: 10px;
-  background-color: #fa2b2b;
-  color: #fff;
+  margin-left: 20%;
+  background-color: #1d3746 !important;
+  display: block !important;
+  color: #edebf0 !important;
   font-family: 'TradeGothicLTStd-Cn18', sans-serif;
+  background-image: none !important;
+  border-radius: 0 !important;
   font-style: normal;
-  font-size: 14pt;
-  padding-top: 6px;
+  font-size: 14pt !important;
+  padding-top: 6px !important;
   width: 230px;
   height: 50px;
   outline: none;
@@ -3247,34 +3225,25 @@ padding-top: 6px;
 }
 
 .col-1{
-  width: 25%;
-  left: 20px;
+  text-align: center;
+  margin-left: 20px;
   height: 400px;
+  width: 390px;
   display: inline-block;
   float: left;
-  margin: 50px;
+  margin: 35px;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #383838;
 }
 
-.col-2{
-  width: 25%;
-  height: 400px;
-  display: inline-block;
-  float: left;
-  margin: 50px;
-  text-align: center;
-  border: 1px solid black;
+.modal_div{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
 }
-.col-3{
-  width: 25%;
-  height: 400px;
-  display: inline-block;
-  float: left;
-  margin: 50px;
-  text-align: center;
-  border: 1px solid black;
-}
+
 
 .login_select{
   margin-top: 15px;

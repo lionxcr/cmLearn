@@ -13,34 +13,53 @@ block content
 		a(href="") MY PROFILE
 		a(href="/PDSARequest") PDSA REQUESTS
 		a(href="") LOGOUT
-	div(role="main")
-		h2 #{greeting}
-		p.into You want to be the best at what you do. We all do &ndash; and that&rsquo;s why we work at Critical Mass. But it&rsquo;s a process, and we want to help. That&rsquo;s why there&rsquo;s the Professional Development program. Whether it&rsquo;s a course you want to take, reference materials to peruse, or maybe it&rsquo;s an industry event you&#x27;d like to attend - we&rsquo;ve got your back. All you have to do is let us know what you&rsquo;re thinking, why you&rsquo;re thinking it, and meet with your career developer to establish a plan to share your experience with your coworkers. It&rsquo;s really that simple.
-		span.questionSpan What would you like to use your PDSA on?
-		div.optionContainer
-				div.col-1
-					h3 An Event
-					button.pdsaTypeButton Conference
-					button.pdsaTypeButton Workshop
-					button.pdsaTypeButton Seminar
-				div.col-2
-					h3 Continuing Education
-					button.pdsaTypeButton Course
-					button.pdsaTypeButton Professional Designation
-					button.pdsaTypeButton Memberships
-				div.col-3
-					h3 Reference Materials
-					button.pdsaTypeButton Book
-					button.pdsaTypeButton Magazine Subscription
-	div(role="info_profile" id="my_balance")
-		h3 Your Remaining 2015 Balance:
-		div.balance #{currency}#{balance}
-		span.notice *Balance is estimated and may not reflect partially submitted expenses.
-	script.
-		function showBalance(id){if (id == 'open') {$('#my_balance').css({"visibility": "visible"});var obj = document.getElementById(id);obj.id = 'closed';}else{$('#my_balance').css({"visibility": "hidden"});var obj = document.getElementById(id);obj.id = 'open';};}
-	script.
-		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),body = document.body;
-	script.
-		showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
-	script.
-		function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}}
+	div.container-fluid
+		div.modal.fade(id="myModal" tabindex="-1" role="dialog")
+			.modal-dialog.wide-modal
+				.modal-content
+					.modal-header
+						button(type="button", class="close", data-dismiss="modal") x
+						h3 PDSA Request Form
+					.modal-body
+						p One fine body...
+					.modal-footer
+		div.row
+			div.col-md-12(role="main")
+				h2 #{greeting}
+				p.into You want to be the best at what you do. We all do &ndash; and that&rsquo;s why we work at Critical Mass. But it&rsquo;s a process, and we want to help. That&rsquo;s why there&rsquo;s the Professional Development program. Whether it&rsquo;s a course you want to take, reference materials to peruse, or maybe it&rsquo;s an industry event you&#x27;d like to attend - we&rsquo;ve got your back. All you have to do is let us know what you&rsquo;re thinking, why you&rsquo;re thinking it, and meet with your career developer to establish a plan to share your experience with your coworkers. It&rsquo;s really that simple.
+				span.questionSpan What would you like to use your PDSA on?
+			div.col-xs-6.col-md-4.col-1
+				h3 An Event
+				button.btn.btn-primary.pdsaTypeButton(name='conference' data-toggle="modal" data-target="#myModal") Conference
+				button.pdsaTypeButton Workshop
+				button.pdsaTypeButton Seminar
+			div.col-xs-6.col-md-4.col-1
+				h3 Continuing Education
+				button.pdsaTypeButton Course
+				button.pdsaTypeButton Professional Designation
+				button.pdsaTypeButton Memberships
+			div.col-xs-6.col-md-4.col-1
+				h3 Reference Materials
+				button.pdsaTypeButton Book
+				button.pdsaTypeButton Magazine Subscription
+		div(role="info_profile" id="my_balance")
+			h3 Your Remaining 2015 Balance:
+			div.balance #{currency}#{balance}
+			span.notice *Balance is estimated and may not reflect partially submitted expenses.
+		script.
+			$(document).ready(function(){
+				if(#{strikeprices}){
+					$('#myModal').modal('show')
+				}
+				$('body').on('hidden.bs.modal', '.modal', function () {
+					$(this).removeData('bs.modal');
+				});
+			});
+		script.
+			function showBalance(id){if (id == 'open') {$('#my_balance').css({"visibility": "visible"});var obj = document.getElementById(id);obj.id = 'closed';}else{$('#my_balance').css({"visibility": "hidden"});var obj = document.getElementById(id);obj.id = 'open';};}
+		script.
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),body = document.body;
+		script.
+			showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
+		script.
+			function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}}
