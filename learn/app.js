@@ -8,6 +8,7 @@ var routes = require('./routes/index');
 var login = require('./routes/login');
 var home = require('./routes/home');
 var pdsa = require('./routes/pdsa');
+var newUser = require('./routes/newUser');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/', routes);
 app.use('/login', login);
 app.use('/home', home);
 app.use('/PDSARequest', pdsa);
+app.use('/newUser', newUser);
 app.use(cookieParser());
 
 

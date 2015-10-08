@@ -1,0 +1,44 @@
+extends layout
+block variables
+	- bodyClass = "reviews"
+block content
+	div.container
+		div.row
+			div.col-md-6.col-md-offset-3
+				h1(style="text-align: center;") Welcome #{name}!
+				p(style="text-align: center;") Please complete your Brand New Profile for our PDSA Tool
+				form.form-signin(action="/newUser", method="post", style="margin-top: -5px; text-align: center;")
+					select.login_select(id="department", name="department", required)
+					script(type='text/javascript').
+						var depart = JSON.parse('!{depart}');
+						var select = document.getElementById("department");
+						for(var i = 0; i< depart.length; i++){
+							if (i == 0){
+								select.innerHTML += "<option value=''>Please Select your Department</option>";
+							};
+							select.innerHTML += "<option value=" + depart[i] + ">" + depart[i] + "</option>";
+						}
+					br
+					select.login_select(id="jobTitle", name="jobTitle", required)
+					script(type='text/javascript').
+						var jobTitles = JSON.parse('!{jobTitles}');
+						var select = document.getElementById("jobTitle");
+						for(var i = 0; i< jobTitles.length; i++){
+							if (i == 0){
+								select.innerHTML += "<option value=''>Please Select your Job Title</option>";
+							};
+							select.innerHTML += "<option value=" + jobTitles[i]['id'] + ">" + jobTitles[i]['title'] + "</option>";
+						}
+					br
+					select.login_select(id="location", name="location", required)
+					script(type='text/javascript').
+						var locations = JSON.parse('!{location}');
+						var select = document.getElementById("location");
+						for(var i = 0; i< locations.length; i++){
+							if (i == 0){
+								select.innerHTML += "<option value=''>Please Select your Location</option>";
+							};
+							select.innerHTML += "<option value=" + i + ">" + locations[i] + "</option>";
+						}
+					br
+					button COMPLETE

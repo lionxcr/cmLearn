@@ -4,7 +4,12 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
    	var hello = getGreetings(req.cookies['learn']['name']);
-    res.render('pdsa', { title: 'PDSA Request', greeting : hello });
+   	var currency = req.cookies['learn']['currency'];
+   	var balance = req.cookies['learn']['balance'];
+   	if (currency == 'USD') currency = '$';
+   	if (currency == 'GBP') currency = '£';
+   	if (currency == 'CAD') currency = 'C$';
+    res.render('pdsa', { title: 'PDSA Request', greeting : hello, balance : balance, currency : currency });
  	console.log("Cookie :  ", req.cookies['learn']);
 });
 
@@ -34,8 +39,7 @@ function getGreetings(name){
 		"Top o' the mornin'",
 		"Word",
 		"Word up",
-		"Mellow greetings",
-		"C&oacute;mo est&aacute;s"
+		"Mellow greetings"
 	];
 	var randMVal = Math.floor(Math.random() * greetingsArray.length)
 	randMVal = randMVal -1;
