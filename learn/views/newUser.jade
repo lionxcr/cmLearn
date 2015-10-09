@@ -6,7 +6,7 @@ block content
 		div.row
 			div.col-md-6.col-md-offset-3
 				h1(style="text-align: center;") Welcome #{name}!
-				p(style="text-align: center;") Please complete your Brand New Profile for our PDSA Tool
+				p(style="text-align: center;") Please Verify Your Profile
 				form.form-signin(action="/newUser", method="post", style="margin-top: -5px; text-align: center;")
 					select.login_select(id="department", name="department", required)
 					script(type='text/javascript').
@@ -14,7 +14,7 @@ block content
 						var select = document.getElementById("department");
 						for(var i = 0; i< depart.length; i++){
 							if (i == 0){
-								select.innerHTML += "<option value=''>Please Select your Department</option>";
+								select.innerHTML += "<option value=''>Confirm your Discipline</option>";
 							};
 							select.innerHTML += "<option value=" + depart[i] + ">" + depart[i] + "</option>";
 						}
@@ -25,7 +25,7 @@ block content
 						var select = document.getElementById("jobTitle");
 						for(var i = 0; i< jobTitles.length; i++){
 							if (i == 0){
-								select.innerHTML += "<option value=''>Please Select your Job Title</option>";
+								select.innerHTML += "<option value=''>Confirm your Job Title</option>";
 							};
 							select.innerHTML += "<option value=" + jobTitles[i]['id'] + ">" + jobTitles[i]['title'] + "</option>";
 						}
@@ -36,7 +36,7 @@ block content
 						var select = document.getElementById("location");
 						for(var i = 0; i< locations.length; i++){
 							if (i == 0){
-								select.innerHTML += "<option value=''>Please Select your Location</option>";
+								select.innerHTML += "<option value=''>Confirm your Location</option>";
 							};
 							select.innerHTML += "<option value=" + i + ">" + locations[i] + "</option>";
 						}
