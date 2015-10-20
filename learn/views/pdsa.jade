@@ -19,9 +19,8 @@ block content
 				.modal-content
 					.modal-header
 						button(type="button", class="close", data-dismiss="modal") x
-						h3 PDSA Request Form
-					.modal-body
-						p One fine body...
+						h3(id="header_title")
+					.modal-body(id="modal_body")
 					.modal-footer
 		div.row
 			div.col-md-12(role="main")
@@ -30,29 +29,28 @@ block content
 				span.questionSpan What would you like to use your PDSA on?
 			div.col-xs-6.col-md-4.col-1
 				h3 An Event
-				button.btn.btn-primary.pdsaTypeButton(name='conference' data-toggle="modal" data-target="#myModal") Conference
-				button.pdsaTypeButton Workshop
-				button.pdsaTypeButton Seminar
+				button.btn.btn-primary.pdsaTypeButton(id='conference' onclick="showModalWithInfo(this.id)") Conference
+				button.pdsaTypeButton(id='workshop' onclick="showModalWithInfo(this.id)") Workshop
+				button.pdsaTypeButton(id='seminar' onclick="showModalWithInfo(this.id)") Seminar
 			div.col-xs-6.col-md-4.col-1
 				h3 Continuing Education
-				button.pdsaTypeButton Course
-				button.pdsaTypeButton Professional Designation
-				button.pdsaTypeButton Memberships
+				button.pdsaTypeButton(id='course' onclick="showModalWithInfo(this.id)") Course
+				button.pdsaTypeButton(id='pd' onclick="showModalWithInfo(this.id)") Professional Designation
+				button.pdsaTypeButton(id='pd' onclick="showModalWithInfo(this.id)") Memberships
 			div.col-xs-6.col-md-4.col-1
 				h3 Reference Materials
-				button.pdsaTypeButton Book
-				button.pdsaTypeButton Magazine Subscription
+				button.pdsaTypeButton(id='book' onclick="showModalWithInfo(this.id)") Book
+				button.pdsaTypeButton(id='magazine' onclick="showModalWithInfo(this.id)") Magazine Subscription
 		div(role="info_profile" id="my_balance")
 			h3 Your Remaining 2015 Balance:
 			div.balance #{currency}#{balance}
 			span.notice *Balance is estimated and may not reflect partially submitted expenses.
 		script.
 			$(document).ready(function(){
-				if(#{strikeprices}){
-					$('#myModal').modal('show')
-				}
 				$('body').on('hidden.bs.modal', '.modal', function () {
 					$(this).removeData('bs.modal');
+					var modalBody = document.getElementById("modal_body");
+					modalBody.innerHTML = '';
 				});
 			});
 		script.
@@ -62,4 +60,37 @@ block content
 		script.
 			showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
 		script.
-			function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}}
+			function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}};
+			function showModalWithInfo(id) {
+				var data = !{JSON.stringify(questionArray)};
+				var lookup = [];
+				var x = 0;
+				var y = 0;
+				console.log(id);
+				while(y < 1){
+					if(!data[x][id]){
+						x++;
+					}else{
+						y = 10;
+					};
+				};
+				for (var i = 0, len = data[x][id].length; i < len; i++) {
+					var dataId = data[x][id][i]['category'];
+					if (id == 'pd'){
+						dataId = 'pd';
+					}
+				    console.log(dataId);
+				    if(dataId == id){
+				    	lookup.push(data[x][id][i]);
+				    };
+				};
+				console.log(lookup);
+				var header = document.getElementById("header_title");
+				header.innerHTML = 'PDSA Request Form';
+				var modalBody = document.getElementById("modal_body");
+				modalBody.innerHTML += '<p>'+lookup[0]['question']+'</p>';
+				modalBody.innerHTML += '<p>'+lookup[1]['question']+'</p>';
+				modalBody.innerHTML += '<p>'+lookup[2]['question']+'</p>';
+				$('#myModal').modal('show');
+			
+			};

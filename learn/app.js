@@ -29,8 +29,6 @@ app.use('/login', login);
 app.use('/home', home);
 app.use('/PDSARequest', pdsa);
 app.use('/newUser', newUser);
-app.use(cookieParser());
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
