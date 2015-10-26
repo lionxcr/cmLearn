@@ -11,18 +11,19 @@ var connection = mysql.createConnection({
 });
 
 router.post('/', function(req, res, next) {
-    
-    // res.render('home', { title: 'Lean Home'});
-    var data = JSON.parse(req.cookies['learn']);
-    var domain = data['sAMAccountName'];
-    var fullNameStr = data['cn'];
+    var domain = req.body.domainName;
+    var fullNameStr = req.body.fullName;
     var tierStr = 0;
     var currencyStr = '';
     var balanceStr = 0;
     var titleStr = req.body.jobTitle;
     var locationStr = req.body.location;
     var departmentStr = req.body.department;
-    var emailStr = data['userPrincipalName']
+    var firstName = req.body.firstName;
+    var emailStr = req.body.email;
+    var manager = req.body.manager;
+    var managerEmail = req.body.managerEmail;
+    var managerDomain = req.body.managerDomain;
     connection.query('SELECT * from tiers where id = '+titleStr+'', function(err, rows, fields) {
 	  if (!err){
 	  	if (rows.length == 0) {
@@ -31,55 +32,25 @@ router.post('/', function(req, res, next) {
 	  		titleStr = rows[0]['title'];
 	  		tierStr = rows[0]['tier'];
 	  		balanceStr = tierStr * 500;
-	  		if (locationStr == '0' || locationStr == '9') {
+	  		if (locationStr == 'Calgary' || locationStr == 'Toronto') {
 	  			currencyStr = 'CAD';
 	  		};
-	  		if (locationStr == '1' || locationStr == '2' || locationStr == '4' || locationStr == '3' || locationStr == '6' || locationStr == '7' || locationStr == '8') {
+	  		if (locationStr == 'Chicago' || locationStr == 'THI' || locationStr == 'LA' || locationStr == 'Nashville' || locationStr == 'New York' || locationStr == 'Hong Kong' || locationStr == 'Singapore') {
 	  			currencyStr = 'USD';
 	  		};
-	  		if (locationStr == '5') {
+	  		if (locationStr == 'London') {
 	  			currencyStr = 'GBP';
 	  		};
-	  		switch(locationStr) {
-			    case '0':
-			        locationStr = 'CALGARY';
-			        break;
-			    case '1':
-			        locationStr = 'CHICAGO';
-			        break;
-			    case '2':
-			        locationStr = 'COSTA RICA';
-			        break;
-			    case '3':
-			        locationStr = 'HONG KONG';
-			        break;
-			    case '4':
-			        locationStr = 'LOS ANGELES';
-			        break;
-			    case '5':
-			        locationStr = 'LONDON';
-			        break;
-			    case '6':
-			        locationStr = 'NASHVILLE';
-			        break;
-			    case '7':
-			        locationStr = 'NEW YORK';
-			        break;
-			    case '8':
-			        locationStr = 'SINGAPORE';
-			        break;
-			    case '9':
-			        locationStr = 'TORONTO';
-			        break;
-			    default:
-			        break;
-			}
-	  		var post  = {domainName : domain, fullName : fullNameStr, balance : balanceStr, title : titleStr, tier : tierStr, currency : currencyStr, email : emailStr, department : departmentStr, location : locationStr};
+	  		var post  = {domainName : domain, fullName : fullNameStr, balance : balanceStr, title : titleStr, tier : tierStr, currency : currencyStr, email : emailStr, department : departmentStr, manager : manager, manager_email : managerEmail, managerDomainName : managerDomain, location : locationStr};
 			var query = connection.query('INSERT INTO people SET ?', post, function(err, result) {
 			  // Neat!
-			  console.log('added user');
-			  res.cookie('learn' , {'domainName' : domain, 'name' : data['givenName'], 'balance' : balanceStr, currency : currencyStr}, {expire : new Date() + 9999});
-			  res.redirect('/home');
+			  if (!err) {
+			  	console.log('added user');
+			  	res.cookie('learn' , {'domainName' : domain, 'name' : firstName, 'balance' : balanceStr, currency : currencyStr}, {expire : new Date() + 9999});
+			  	res.redirect('/home');
+			  }else{
+			  	console.log('Error while performing Query.'+err);
+			  };
 			});
 			console.log(query.sql);
 	  	};

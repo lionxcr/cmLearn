@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var ActiveDirectory = require('activedirectory');
-var config = { url: 'ldap://leopard.cmass.criticalmass.com',
-               baseDN: 'dc=cmass,dc=criticalmass,dc=com'}
+var config = { 	url: 'ldap://leopard.cmass.criticalmass.com',
+               	baseDN: 'dc=cmass,dc=criticalmass,dc=com',
+           		attributes: {
+	                user: [ 'sAMAccountName','displayName','givenName','manager','title','department','l','co','mail' ]
+               }}
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -38,7 +41,10 @@ router.post('/', function(req, res, next) {
 	    	url: 'ldap://leopard.cmass.criticalmass.com',
 	        baseDN: 'ou=CriticalMass,dc=cmass,dc=criticalmass,dc=com',
 	      	username: 'jiveldap',
-	        password: 'j!ve2013'
+	        password: 'j!ve2013',
+           	attributes: {
+                user: [ 'sAMAccountName','displayName','givenName','manager','title','department','l','co','mail' ]
+           }
 	    }
 	    var query = 'mail='+username+'';
 	    var good = false;
@@ -52,6 +58,7 @@ router.post('/', function(req, res, next) {
 		  if (!users){
 		  	console.log('User not found.');
 		  }else{
+		  		console.log(users);
 			  	var ind = username.indexOf('@');
 				var domainName = username.slice(0,ind);
 				connection.query('SELECT * from people where domainName = "'+domainName+'"', function(err, rows, fields) {
@@ -65,30 +72,43 @@ router.post('/', function(req, res, next) {
 				    if (good){
 					res.redirect('/home')
 				}else{
-					var department =[
-						'technology',
-						'design',
-						'hr'
-						];
-					var locations = [
-						'CALGARY',
-						'CHICAGO',
-						'COSTA RICA',
-						'HONG KONG',
-						'LOS ANGELES',
-						'LONDON',
-						'NASHVILLE',
-						'NEW YORK',
-						'SINGAPORE',
-						'TORONTO'
-					];
 					connection.query('SELECT * from tiers', function(err, rows, fields) {
 					  if (!err){
-					  	res.cookie('learn' , JSON.stringify(users[0]), {expire : new Date() + 1111});
-						res.render('newUser', { title: 'CM Learn Welcome', 'name' : users[0]['givenName'], 'domainName' : users[0]['sAMAccountName'], 
-						'fullName' : users[0]['displayName'], 'email' : users[0]['userPrincipalName'], 'depart' : JSON.stringify(department), jobTitles : JSON.stringify(rows), 
-						location : JSON.stringify(locations)});
-				
+					  	var config_v3 = { 
+					    	url: 'ldap://leopard.cmass.criticalmass.com',
+					        baseDN: 'ou=CriticalMass,dc=cmass,dc=criticalmass,dc=com',
+					      	username: 'jiveldap',
+					        password: 'j!ve2013',
+				           	attributes: {
+				                user: [ 'sAMAccountName','mail' ]
+				           }
+					    }
+					    var managerName = users[0]['manager'];
+					    managerName = managerName.replace(',OU=CriticalMass,DC=cmass,DC=criticalmass,DC=com', '');
+					    managerName = managerName.replace(',OU=Users,', '');
+					    managerName = managerName.replace('CN=', '');
+					    var locationOU = ['OU=LATAM'];
+					    var xy = 0;
+					    while(xy <= locationOU.length){
+					    	if (managerName.match("OU=")) {
+					    		managerName = managerName.replace(locationOU[xy], '');
+					    	};
+					    	xy++;
+					    }
+					    console.log(managerName);
+					    var query = 'displayName='+managerName+'';
+					  	var ad_v3 = new ActiveDirectory(config_v3);
+						ad_v3.find(query, function(err, results) {
+						  if ((err) || (! results)) {
+						    console.log('ERROR: ' + JSON.stringify(err));
+						    return;
+						  }
+						  users[0]['managerInfo'] = results['users'];
+						  users[0]['manager'] = managerName;
+						  res.render('newUser', { title: 'CM Learn Welcome', 'name' : users[0]['givenName'], 'domainName' : users[0]['sAMAccountName'], 
+							'fullName' : users[0]['displayName'], 'email' : users[0]['mail'],'department': users[0]['department'], 'jobTitle' : users[0]['title'],
+							'location' : users[0]['l'], 'country' : users[0]['co'], 'manager' : users[0]['manager'], 'managerEmail' : users[0]['managerInfo'][0]['mail'], 'managerDomain' : users[0]['managerInfo'][0]['sAMAccountName'], jobTitles : JSON.stringify(rows)});
+						});
 					  }else{
 					  	console.log('Error while performing Query.'+err);
 					  };

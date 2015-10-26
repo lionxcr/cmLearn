@@ -6,39 +6,55 @@ block content
 		div.row
 			div.col-md-6.col-md-offset-3
 				h1(style="text-align: center;") Welcome #{name}!
-				p(style="text-align: center;") Please Verify Your Profile
+				h4(style="text-align: center;") Please Verify Your Profile
 				form.form-signin(action="/newUser", method="post", style="margin-top: -5px; text-align: center;")
-					select.login_select(id="department", name="department", required)
-					script(type='text/javascript').
-						var depart = JSON.parse('!{depart}');
-						var select = document.getElementById("department");
-						for(var i = 0; i< depart.length; i++){
-							if (i == 0){
-								select.innerHTML += "<option value=''>Confirm your Discipline</option>";
-							};
-							select.innerHTML += "<option value=" + depart[i] + ">" + depart[i] + "</option>";
-						}
+					label Full Name : 
+						input(type="text" name="fullName" value="#{fullName}")
 					br
-					select.login_select(id="jobTitle", name="jobTitle", required)
-					script(type='text/javascript').
-						var jobTitles = JSON.parse('!{jobTitles}');
-						var select = document.getElementById("jobTitle");
-						for(var i = 0; i< jobTitles.length; i++){
-							if (i == 0){
-								select.innerHTML += "<option value=''>Confirm your Job Title</option>";
-							};
-							select.innerHTML += "<option value=" + jobTitles[i]['id'] + ">" + jobTitles[i]['title'] + "</option>";
-						}
+					label Domain Name :
+						input(type="text" name="domainName" value="#{domainName}")
 					br
-					select.login_select(id="location", name="location", required)
-					script(type='text/javascript').
-						var locations = JSON.parse('!{location}');
-						var select = document.getElementById("location");
-						for(var i = 0; i< locations.length; i++){
-							if (i == 0){
-								select.innerHTML += "<option value=''>Confirm your Location</option>";
-							};
-							select.innerHTML += "<option value=" + i + ">" + locations[i] + "</option>";
-						}
+					label Email Address :
+						input(type="text" name="email" value="#{email}")
+					input(type="text" name="country" value="#{country}" style="visibility: hidden;")
+					input(type="text" name="firstName" value="#{name}" style="visibility: hidden;")
+					label Department :
+						input(type="text" name="department" value="#{department}")
+					label Carrer Developer :
+						input(type="text" name="manager" value="#{manager}")
+					label Carrer Developer Email:
+						input(type="text" name="managerEmail" value="#{managerEmail}")
+					input(type="text" name="managerDomain" value="#{managerDomain}" style="visibility: hidden;")
+					label Title :
+						select.login_select(id="jobTitle", name="jobTitle", required)
+						script(type='text/javascript').
+							var jobTitles = JSON.parse('!{jobTitles}');
+							var selectJobId = 0;
+							var select = document.getElementById("jobTitle");
+							for(var i = 0; i< jobTitles.length; i++){
+								if (i == 0){
+									select.innerHTML += "<option value=''>Confirm your Job Title</option>";
+								};
+								var val = jobTitles[i]['title'];
+								if( val == '#{jobTitle}'){
+									selectJobId = jobTitles[i]['id'];
+								}
+								select.innerHTML += "<option value=" + jobTitles[i]['id'] + ">" + jobTitles[i]['title'] + "</option>";
+							}
+							select.selectedIndex = selectJobId;
+					label Location :
+						select.login_select(id="location", name="location", required)
+							option(value='') Please Select your Current Location
+							option(value="Calgary") Calgary
+							option(value="Chicago") Chicago
+							option(value="THI") Hangar
+							option(value="London") London
+							option(value="LA") Los Angeles
+							option(value="Nashville") Nashville
+							option(value="New York") New York
+							option(value="Toronto") Toronto
+							option(value="Hong Kong") Hong Kong
+							option(value="Singapore") Singapore
+					br
 					br
 					button COMPLETE
