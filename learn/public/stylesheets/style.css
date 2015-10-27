@@ -3280,13 +3280,29 @@ input.pdsaForm{
   border-radius: 0 !important;
 }
 
+input.pdsaForm.error{
+  border: 1px solid red !important;
+}
+
+input.pdsaForm.date.error{
+  border: 1px solid red !important;
+}
+
 input.pdsaForm.date{
   width: 120px !important;
   margin-left: 30px !important;
 }
 
+input.pdsaForm.currency.error{
+  border: 1px solid red !important;
+}
+
 input.pdsaForm.currency{
   margin-left: 47px !important;
+}
+
+textarea.error{
+  border: 1px solid red !important;
 }
 
 .login_select{

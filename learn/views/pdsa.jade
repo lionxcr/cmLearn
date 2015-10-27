@@ -54,10 +54,7 @@ block content
 				});
 			});
 		script.
-			function showBalance(id){if (id == 'open') {$('#my_balance').css({"visibility": "visible"});var obj = document.getElementById(id);obj.id = 'closed';}else{$('#my_balance').css({"visibility": "hidden"});var obj = document.getElementById(id);obj.id = 'open';};}
-		script.
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),body = document.body;
-		script.
 			showLeft.onclick = function() {classie.toggle( this, 'active' ); classie.toggle( menuLeft, 'cbp-spmenu-open' ); disableOther( 'showLeft' );};
 		script.
 			function disableOther( button ) {if( button !== 'showLeft' ) {classie.toggle( showLeft, 'disabled' );}};
@@ -66,7 +63,6 @@ block content
 				var lookup = [];
 				var x = 0;
 				var y = 0;
-				console.log(id);
 				while(y < 1){
 					if(!data[x][id]){
 						x++;
@@ -88,58 +84,28 @@ block content
 				var header = document.getElementById("header_title");
 				header.innerHTML = 'PDSA Request Form';
 				var modalBody = document.getElementById("modal_body");
-				modalBody.innerHTML += '<div class="formDiv">'
+				modalBody.innerHTML += '<div class="formDiv">';
+				modalBody.innerHTML += '<form action="/PDSARequest/newPDSA" method="POST" id="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="question1">'+lookup[0]['question']+'</label>';
-				modalBody.innerHTML += '<input type="text" name="pdsaName" required class="pdsaForm" id="input1">';
+				modalBody.innerHTML += '<input type="text" name="pdsaType" value="'+id+'" form="newPdsaForm" style="display: none;">';
+				modalBody.innerHTML += '<input type="text" name="pdsaName" required class="pdsaForm" id="input1" value="" form="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="question2">'+lookup[1]['question']+'</label>';
-				modalBody.innerHTML += '<input type="text" name="pdsaLocation" required class="pdsaForm" id="input2">';
+				modalBody.innerHTML += '<input type="text" name="pdsaLocation" required class="pdsaForm" id="input2" value="" form="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="question3">Is there a website?</label>';
-				modalBody.innerHTML += '<input type="text" name="pdsaSite" required class="pdsaForm" id="input3">';
+				modalBody.innerHTML += '<input type="text" name="pdsaSite" required class="pdsaForm" id="input3" value="">';
 				modalBody.innerHTML += '<label class="question" id="question4" style="display: none;">When does it Occur?</label>';
-				modalBody.innerHTML += '<input type="text" id="datepickerStart" name="pdsaStartDate" required class="pdsaForm date" style="display: none;" placeholder="Start">';
-				modalBody.innerHTML += '<input type="text" id="datepickerEnd" name="pdsaEndDate" required class="pdsaForm date" style="display: none;" placeholder="End">';
+				modalBody.innerHTML += '<input type="text" id="datepickerStart" name="pdsaStartDate" required class="pdsaForm date" style="display: none;" placeholder="Start" value="" form="newPdsaForm">';
+				modalBody.innerHTML += '<input type="text" id="datepickerEnd" name="pdsaEndDate" required class="pdsaForm date" style="display: none;" placeholder="End" value="" form="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="question5" style="display: none;">How much does it cost?</label>';
-				modalBody.innerHTML += '<div class="selectWrap currency" id="currency" style="display: none;"><div class="firstHolder selected"><a class="USD" href="#"></a></div></div><input type="text" name="pdsaSite" required class="pdsaForm currency" id="input5" style="display: none;">';
+				modalBody.innerHTML += '<div class="selectWrap currency" id="currency" style="display: none;"><div class="firstHolder selected"><a class="USD" href="#"></a></div></div><input type="text" name="pdsaSite" required class="pdsaForm currency" id="input5" style="display: none;" value="" form="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="whyQuestion" style="display: none;">'+lookup[2]['question']+'</label>';
-				modalBody.innerHTML += '<textarea name="pdsaWhy" id="whyInput" rows="5" cols="80" style="display: none; width: 450px;"">';
+				modalBody.innerHTML += '<textarea name="pdsaWhy" id="whyInput" rows="5" cols="80" style="display: none; width: 450px;"" value="" class="pdsaForm" required form="newPdsaForm">';
 				modalBody.innerHTML += '<label class="question" id="shareQuestion" style="display: none;"">How are you going to share your experience?</label>';
-				modalBody.innerHTML += '<textarea name="pdsaShare" id="shareInput" rows="5" cols="80" style="display: none; width: 450px;"">';
+				modalBody.innerHTML += '<textarea name="pdsaShare" id="shareInput" rows="5" cols="80" style="display: none; width: 450px;"" class="pdsaForm" value="" required form="newPdsaForm">';
 				modalBody.innerHTML += '<br><br><button id="pdsaFormStep1" onclick="nextPressed(this.id)" class="pdsaTypeButton next">Next</button>';
+				modalBody.innerHTML += '</form>'
 				modalBody.innerHTML += '</div>'
 				$( "#datepickerStart" ).datepicker({ dateFormat: "dd M yy", minDate: 0 });
 				$( "#datepickerEnd" ).datepicker({ dateFormat: "dd M yy", minDate: 0 });
 				$('#myModal').modal('show');
-			};
-			function nextPressed(id){
-				console.log(id);
-				if(id == 'pdsaFormStep1'){
-					document.getElementById("question1").style["display"] = "none";
-					document.getElementById("question2").style["display"] = "none";
-					document.getElementById("question3").style["display"] = "none";
-					document.getElementById("input1").style["display"] = "none";
-					document.getElementById("input2").style["display"] = "none";
-					document.getElementById("input3").style["display"] = "none";
-					document.getElementById("question4").style["display"] = "inline-block";
-					document.getElementById("question5").style["display"] = "inline-block";
-					document.getElementById("datepickerStart").style["display"] = "inline-block";
-					document.getElementById("datepickerEnd").style["display"] = "inline-block";
-					document.getElementById("input5").style["display"] = "inline-block";
-					document.getElementById("currency").style["display"] = "inline-block";
-					document.getElementById("pdsaFormStep1").id = "pdsaFormStep2";
-				};
-				if(id == 'pdsaFormStep2'){
-					document.getElementById("question4").style["display"] = "none";
-					document.getElementById("question5").style["display"] = "none";
-					document.getElementById("datepickerStart").style["display"] = "none";
-					document.getElementById("datepickerEnd").style["display"] = "none";
-					document.getElementById("input5").style["display"] = "none";
-					document.getElementById("currency").style["display"] = "none";
-					document.getElementById("pdsaFormStep2").innerHTML = "Review Submission";
-					document.getElementById("pdsaFormStep2").id = "pdsaFormStep3";
-					document.getElementById("whyQuestion").style["display"] = "inline-block";
-					document.getElementById("shareQuestion").style["display"] = "inline-block";
-					document.getElementById("whyInput").style["display"] = "inline-block";
-					document.getElementById("shareInput").style["display"] = "inline-block";
-
-				};
 			};

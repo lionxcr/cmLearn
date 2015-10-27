@@ -10,6 +10,10 @@ var connection = mysql.createConnection({
   database : 'learn'
 });
 
+router.post('/newPDSA', function(req, res, next) {
+	console.log(req.body);
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
    	var hello = getGreetings(req.cookies['learn']['name']);
